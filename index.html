@@ -383,24 +383,23 @@ document.body.addEventListener("touchstart", startMusicOnce);
 </audio>
 
 <script>
-const bgMusic = document.getElementById("bgMusic");
+window.addEventListener("DOMContentLoaded", function () {
 
-function startMusicOnce() {
-    bgMusic.volume = 0.5;
-    bgMusic.play().then(() => {
-        console.log("Music playing");
-    }).catch(err => {
-        console.log("Autoplay blocked:", err);
-    });
+    const bgMusic = document.getElementById("bgMusic");
 
-    // Hanya sekali jalan
-    document.body.removeEventListener("click", startMusicOnce);
-    document.body.removeEventListener("touchstart", startMusicOnce);
-}
+    function playMusic() {
+        if (bgMusic.paused) {
+            bgMusic.volume = 0.5;
+            bgMusic.play().catch(() => {});
+        }
 
-// Klik bagian mana pun = play
-document.body.addEventListener("click", startMusicOnce);
-document.body.addEventListener("touchstart", startMusicOnce);
+        document.removeEventListener("click", playMusic);
+        document.removeEventListener("touchstart", playMusic);
+    }
+
+    document.addEventListener("click", playMusic);
+    document.addEventListener("touchstart", playMusic);
+});
 </script>
 
 <script src="script.js"></script>
