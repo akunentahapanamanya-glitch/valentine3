@@ -195,32 +195,22 @@
 <script>
 const bgMusic = document.getElementById("bgMusic");
 
-function startMusic() {
-    if (bgMusic.paused) {
-        bgMusic.volume = 0.5;
-        bgMusic.play().catch(() => {});
-    }
-    document.removeEventListener("click", startMusic);
-    document.removeEventListener("touchstart", startMusic);
+function startMusicOnce() {
+    bgMusic.volume = 0.5;
+    bgMusic.play().then(() => {
+        console.log("Music playing");
+    }).catch(err => {
+        console.log("Autoplay blocked:", err);
+    });
+
+    // Hanya sekali jalan
+    document.body.removeEventListener("click", startMusicOnce);
+    document.body.removeEventListener("touchstart", startMusicOnce);
 }
 
-document.addEventListener("click", startMusic);
-document.addEventListener("touchstart", startMusic);
-
-document.getElementById("yesBtn").addEventListener("click", function () {
-    if (bgMusic.paused) {
-        bgMusic.volume = 0;
-        bgMusic.play().catch(()=>{});
-
-        let fade = setInterval(() => {
-            if (bgMusic.volume < 0.5) {
-                bgMusic.volume += 0.05;
-            } else {
-                clearInterval(fade);
-            }
-        }, 200);
-    }
-});
+// Klik bagian mana pun = play
+document.body.addEventListener("click", startMusicOnce);
+document.body.addEventListener("touchstart", startMusicOnce);
 </script>
 
 <script src="script.js"></script>
