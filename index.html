@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Be My Valentine? 💕</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#ff9ecf,#ffc1e3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+    text-align:center;
+    color:white;
+}
+
+.card{
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    max-width:400px;
+}
+
+button{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.yes{
+    background:#ff4da6;
+    color:white;
+}
+
+.no{
+    background:white;
+    color:#ff4da6;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+.hidden{
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="mainCard">
+    <h1>Will You Be My Valentine? 💕</h1>
+    <p>Please say yes 🥺</p>
+    <button class="yes" onclick="sayYes()">YES</button>
+    <button class="no" onclick="moveNo()">NO</button>
+</div>
+
+<div class="card hidden" id="successCard">
+    <h1>YAAAY 💖</h1>
+    <p>Sekarang kamu resmi jadi My Valentine 💕</p>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="lagu.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const bgMusic = document.getElementById("bgMusic");
+
+function startMusic(){
+    if(bgMusic.paused){
+        bgMusic.volume = 0.5;
+        bgMusic.play().catch(()=>{});
+    }
+    document.removeEventListener("click", startMusic);
+}
+document.addEventListener("click", startMusic);
+
+function sayYes(){
+    document.getElementById("mainCard").classList.add("hidden");
+    document.getElementById("successCard").classList.remove("hidden");
+}
+
+function moveNo(){
+    const btn = document.querySelector(".no");
+    btn.style.position="absolute";
+    btn.style.left=Math.random()*80+"%";
+    btn.style.top=Math.random()*80+"%";
+}
+</script>
+
+</body>
+</html>
