@@ -206,9 +206,6 @@ function startMusic() {
 
 document.addEventListener("click", startMusic);
 document.addEventListener("touchstart", startMusic);
-</script>
-<script>
-const bgMusic = document.getElementById("bgMusic");
 
 document.getElementById("yesBtn").addEventListener("click", function () {
     if (bgMusic.paused) {
@@ -225,21 +222,7 @@ document.getElementById("yesBtn").addEventListener("click", function () {
     }
 });
 </script>
+
 <script src="script.js"></script>
-</body>document.addEventListener("click", startMusic);
-
-function sayYes(){
-    document.getElementById("mainCard").classList.add("hidden");
-    document.getElementById("successCard").classList.remove("hidden");
-}
-
-function moveNo(){
-    const btn = document.querySelector(".no");
-    btn.style.position="absolute";
-    btn.style.left=Math.random()*80+"%";
-    btn.style.top=Math.random()*80+"%";
-}
-</script>
-
 </body>
 </html>
